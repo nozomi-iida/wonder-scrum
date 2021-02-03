@@ -4,8 +4,7 @@ class Account < ApplicationRecord
   has_secure_password
 
   validates :username, presence: true
-  EMAIL_REGEXP = %r{\A[a-zA-Z0-9.!\#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9]
-(?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\z}.freeze
-  validates :email, presence: true, uniqueness: true, format: EMAIL_REGEXP
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i.freeze
+  validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: VALID_EMAIL_REGEX }
   validates :password, length: { minimum: 8 }, if: -> { password.present? }
 end
