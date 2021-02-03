@@ -10,5 +10,12 @@ module Types
     def all_accounts
       Account.all
     end
+
+    field :account, Types::AccountType, null: false do
+      argument :id, ID, required: false
+    end
+    def account(args)
+      Account.find(args[:id])
+    end
   end
 end
