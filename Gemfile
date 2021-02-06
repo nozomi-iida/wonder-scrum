@@ -2,46 +2,32 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.5.8'
+ruby '2.5.5'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.1.1'
-# Use postgresql as the database for Active Record
+gem 'rails', '~> 6.0'
 gem 'pg', '~> 1.1'
-# Use Puma as the app server
 gem 'puma', '~> 5.0'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-# gem 'jbuilder', '~> 2.7'
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
-# Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 gem 'graphql', '~> 1.11'
 gem 'jwt', '~> 2.2'
-
-# Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
-
-# Reduces boot times through caching; required in config/boot.rb
+gem 'dotenv-rails'
 gem 'bootsnap', '>= 1.4.4', require: false
-
-# Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem 'rack-cors'
+gem 'rack-cors'
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
-  gem 'rspec-rails', '~> 3.8'
-  gem 'rubocop'
-  gem 'rubocop-performance'
-  gem 'rubocop-rails'
-  gem 'rubocop-rspec'
+  gem 'rspec', '~> 3.9'
+  gem 'rspec-graphql_matchers', '~> 1.3'
+  gem 'rspec-rails', '~> 4.0'
+  gem 'rubocop', '~> 0.93.0'
+  gem 'rubocop-rails', '~> 2.8'
+  gem 'rubocop-rspec', '~> 1.44'
+  gem 'ruby-debug-ide'
 end
 
 group :development do
   gem 'listen', '~> 3.3'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'graphiql-rails'
   gem 'spring'
 end

@@ -3,6 +3,7 @@ require 'rails_helper'
 
 RSpec.describe Account, type: :model do
   it 'is valid' do
-    expect { 1 + 3 }.to eq 4
+    account = Account.new(username: "Nozomi", email: "test@test.com", password: "password")
+    expect(account.valid?).to eq true
   end
 end

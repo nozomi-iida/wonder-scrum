@@ -10,18 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_01_122439) do
+ActiveRecord::Schema.define(version: 2021_02_05_065808) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "accounts", force: :cascade do |t|
-    t.string "username"
-    t.string "email"
-    t.string "password_digest"
+  create_table "accounts", id: :uuid, default: -> { "gen_random_uuid()" }, comment: "account", force: :cascade do |t|
+    t.string "username", comment: "username"
+    t.string "email", comment: "email"
+    t.string "password_digest", comment: "Encrypted password"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_accounts_on_email", unique: true
   end
 
+  create_table "tasks", id: :uuid, default: -> { "gen_random_uuid()" }, comment: "task", force: :cascade do |t|
+    t.string "name", comment: "task name"
+    t.integer "state", default: 0, comment: "task status"
+    t.boolean "closed", comment: "task closed?"
+    t.uuid "creator_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["creator_id"], name: "index_tasks_on_creator_id"
+  end
+
+  add_foreign_key "tasks", "accounts", column: "creator_id", on_delete: :cascade
 end
