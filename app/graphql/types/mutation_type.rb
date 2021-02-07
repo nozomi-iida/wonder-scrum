@@ -7,6 +7,6 @@ module Types
     field :create_task, mutation: Mutations::CreateTask
     field :delete_account, mutation: Mutations::DeleteAccount
     field :update_account, mutation: Mutations::UpdateAccount
-    field :create_account, mutation: Mutations::CreateAccount, null: false
+    field :create_account, mutation: Mutations::CreateAccount
   end
 end

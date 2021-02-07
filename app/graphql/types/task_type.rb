@@ -7,7 +7,7 @@ module Types
     field :state, Enums::TaskState, null: false
     field :closed, Boolean, null: false
     field :creator, AccountType, null: false
-    field :created_at, Types::DataTimeType, null: false
-    field :updated_at, Types::DataTimeType, null: false
+    field :created_at, Types::DateTimeType, null: false
+    field :updated_at, Types::DateTimeType, null: false
   end
 end
