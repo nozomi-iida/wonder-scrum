@@ -5,7 +5,7 @@ class CreateTasks < ActiveRecord::Migration[6.1]
       t.integer :state, default: 0, comment: 'task state'
       t.boolean :closed, comment: 'task closed?'
 
-      t.references :creator, type: :uuid, foreign_key: { on_delete: :cascade, to_table: :accounts }
+      t.references :creator, type: :uuid, foreign_key: { on_delete: :nullify, to_table: :accounts }
 
       t.timestamps
     end

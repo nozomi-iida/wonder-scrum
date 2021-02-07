@@ -4,3 +4,5 @@ account = Account.new({ username: 'Nozomi',
                         password: 'password',
                         password_confirmation: 'password' })
 account.save!
+
+

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_05_065808) do
+ActiveRecord::Schema.define(version: 2021_02_07_104315) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -25,6 +25,12 @@ ActiveRecord::Schema.define(version: 2021_02_05_065808) do
     t.index ["email"], name: "index_accounts_on_email", unique: true
   end
 
+  create_table "projects", id: :uuid, default: -> { "gen_random_uuid()" }, comment: "project", force: :cascade do |t|
+    t.string "title", comment: "project title"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "tasks", id: :uuid, default: -> { "gen_random_uuid()" }, comment: "task", force: :cascade do |t|
     t.string "name", comment: "task name"
     t.integer "state", default: 0, comment: "task state"
@@ -32,8 +38,11 @@ ActiveRecord::Schema.define(version: 2021_02_05_065808) do
     t.uuid "creator_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.uuid "project_id"
     t.index ["creator_id"], name: "index_tasks_on_creator_id"
+    t.index ["project_id"], name: "index_tasks_on_project_id"
   end
 
-  add_foreign_key "tasks", "accounts", column: "creator_id", on_delete: :cascade
+  add_foreign_key "tasks", "accounts", column: "creator_id", on_delete: :nullify
+  add_foreign_key "tasks", "projects", on_delete: :cascade
 end

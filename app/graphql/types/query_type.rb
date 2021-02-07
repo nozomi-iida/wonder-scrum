@@ -6,5 +6,6 @@ module Types
     include GraphQL::Types::Relay::HasNodesField
 
     field :tasks, resolver: Resolvers::TasksResolver
+    field :projects, resolver: Resolvers::ProjectsResolver
   end
 end
