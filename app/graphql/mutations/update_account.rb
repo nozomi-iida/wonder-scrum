@@ -4,12 +4,12 @@ module Mutations
   class UpdateAccount < BaseMutation
     field :account, Types::AccountType, null: false
 
-    argument :id, ID, required: true
+    argument :account_id, ID, required: true
     argument :username, String, required: false
     argument :email, String, required: false
 
-    def resolve(**args)
-      account = Account.find(args[:id])
+    def resolve(args)
+      account = Account.find(args[:account_id])
       account.update!(username: args[:username], email: args[:email])
       { account: account }
     end
