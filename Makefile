@@ -80,6 +80,12 @@ rails_g_model: buf_model_name
 rails_g_migration: buf_migrate_label
 	@$(RAILS_C) g migration $(MIGRATE_LABEL)
 
+rails_g_object: buf_migrate_label
+	@$(RAILS_C) g graphql:mutation $(MIGRATE_LABEL)
+
+rails_g_mutation: buf_migrate_label
+	@$(RAILS_C) g graphql:mutation $(MIGRATE_LABEL)
+
 # swagger
 rswag:
 	@$(RAILS_C) rswag
