@@ -1,4 +1,6 @@
+# frozen_string_literal: true
 module JWT
+  # Helper
   module Helper
     module_function
 

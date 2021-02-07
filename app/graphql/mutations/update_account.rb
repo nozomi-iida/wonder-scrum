@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Mutations
   # UpdateAccount
   class UpdateAccount < BaseMutation
@@ -9,7 +10,6 @@ module Mutations
 
     def resolve(**args)
       account = Account.find(args[:id])
-      byebug
       account.update!(username: args[:username], email: args[:email])
       { account: account }
     end

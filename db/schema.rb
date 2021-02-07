@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_065808) do
 
   create_table "tasks", id: :uuid, default: -> { "gen_random_uuid()" }, comment: "task", force: :cascade do |t|
     t.string "name", comment: "task name"
-    t.integer "state", default: 0, comment: "task status"
+    t.integer "state", default: 0, comment: "task state"
     t.boolean "closed", comment: "task closed?"
     t.uuid "creator_id"
     t.datetime "created_at", precision: 6, null: false
