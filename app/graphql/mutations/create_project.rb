@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Mutations
   # CreateProject
   class CreateProject < BaseMutation
@@ -8,7 +9,7 @@ module Mutations
 
     def resolve(args)
       project = Project.create!(args)
-      {project: project}
+      { project: project }
     end
   end
 end

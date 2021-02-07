@@ -1,4 +1,6 @@
+# frozen_string_literal: true
 module Mutations
+  # DeleteProject
   class DeleteProject < BaseMutation
     field :project, Types::ProjectType, null: false
 
