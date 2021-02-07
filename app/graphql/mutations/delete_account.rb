@@ -1,4 +1,6 @@
+# frozen_string_literal: true
 module Mutations
+  # DeleteAccount
   class DeleteAccount < BaseMutation
     field :account, Types::AccountType, null: false
 
@@ -8,7 +10,7 @@ module Mutations
       account = Account.find(args[:id])
       account.destroy!
       {
-        account: account,
+        account: account
       }
     end
   end

@@ -1,7 +1,8 @@
+# frozen_string_literal: true
 module Types
   module Enums
-    # TaskStateType
-    class TaskStateType < Types::BaseEnum
+    # TaskState
+    class TaskState < Types::BaseEnum
       value 'TO_DO', value: 'to_do'
       value 'THIS_WEEK', value: 'this_week'
       value 'TODAY', value: 'today'

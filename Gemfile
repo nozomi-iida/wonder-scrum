@@ -4,18 +4,19 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.5'
 
-gem 'rails', '~> 6.0'
-gem 'pg', '~> 1.1'
-gem 'puma', '~> 5.0'
 gem 'bcrypt', '~> 3.1.7'
+gem 'bootsnap', '>= 1.4.4', require: false
+gem 'dotenv-rails'
 gem 'graphql', '~> 1.11'
 gem 'jwt', '~> 2.2'
-gem 'dotenv-rails'
-gem 'bootsnap', '>= 1.4.4', require: false
+gem 'pg', '~> 1.1'
+gem 'puma', '~> 5.0'
 gem 'rack-cors'
+gem 'rails', '~> 6.0'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'debase'
   gem 'factory_bot_rails'
   gem 'rspec', '~> 3.9'
   gem 'rspec-graphql_matchers', '~> 1.3'
@@ -27,8 +28,8 @@ group :development, :test do
 end
 
 group :development do
-  gem 'listen', '~> 3.3'
   gem 'graphiql-rails'
+  gem 'listen', '~> 3.3'
   gem 'spring'
 end
 
