@@ -5,5 +5,6 @@ FactoryBot.define do
     closed { false }
 
     association :account
+    association :project
   end
 end
