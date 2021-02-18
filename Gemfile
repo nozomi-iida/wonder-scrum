@@ -25,6 +25,7 @@ group :development, :test do
   gem 'rubocop-rails', '~> 2.8'
   gem 'rubocop-rspec', '~> 1.44'
   gem 'ruby-debug-ide'
+  gem 'database_cleaner', '~> 1.8'
 end
 
 group :development do
