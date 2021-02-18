@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'rails_helper'
 
 RSpec.describe Mutations::SignUpAccount do
@@ -17,10 +18,10 @@ RSpec.describe Mutations::SignUpAccount do
   context 'return correct values' do
     let(:account) { create(:account) }
 
-    it  do
+    it do
       object = resolver.resolve(
         username: 'Nozomi',
-        email: account.email,
+        email: account.email
       )
       expect(object).to have_key(:account)
       expect(object[:account][:username]).to eq 'Nozomi'

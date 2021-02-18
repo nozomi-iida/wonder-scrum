@@ -44,25 +44,20 @@ module JWT
     class_methods do
       # 認証
       def authenticate!(token)
-        begin
-          payload, _header = JWT::Helper.decode(
-            token,
-            algorithm: 'HS256',
-            verify_jti: proc { |jti|
-              Jti.exists?(jti)
-            }
-          )
+        payload, _header = JWT::Helper.decode(
+          token,
+          algorithm: 'HS256',
+          verify_jti: proc { |jti|
+            Jti.exists?(jti)
+          }
+        )
 
-          _type, sub = GraphQL::Schema::UniqueWithinType.decode(payload['sub'], separator: ':')
-        rescue Exception => e
-          fail Exceptions::UnauthorizedError, e.message
-        end
-
+        _type, sub = GraphQL::Schema::UniqueWithinType.decode(payload['sub'], separator: ':')
         begin
           find(sub)
-        rescue ActiveRecord::RecordNotFound => e
+        rescue ActiveRecord::RecordNotFound
           Jti.destroy(payload['jti'])
-          raise Exceptions::UnauthorizedError, e.message
+          raise JWT::InvalidSubError
         end
       end
     end
