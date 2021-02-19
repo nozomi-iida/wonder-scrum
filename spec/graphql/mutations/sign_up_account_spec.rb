@@ -16,12 +16,12 @@ RSpec.describe Mutations::SignUpAccount do
   it('exist resolver method') { is_expected.to respond_to(:resolve) }
 
   context 'return correct values' do
-    let(:account) { create(:account) }
-
     it do
       object = resolver.resolve(
         username: 'Nozomi',
-        email: account.email
+        email: 'test@test.com',
+        password: 'password',
+        password_confirmation: 'password'
       )
       expect(object).to have_key(:account)
       expect(object[:account][:username]).to eq 'Nozomi'
