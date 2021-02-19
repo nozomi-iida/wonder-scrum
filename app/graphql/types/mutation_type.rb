@@ -3,9 +3,9 @@
 module Types
   # MutationType
   class MutationType < Types::BaseObject
-    field :delete_project, mutation: Mutations::DeleteProject
+    field :sign_up_account, mutation: Mutations::SignUpAccount
     field :update_account, mutation: Mutations::UpdateAccount
-    field :create_account, mutation: Mutations::CreateAccount
+    field :delete_account, mutation: Mutations::DeleteAccount
 
     field :create_task, mutation: Mutations::CreateTask
     field :update_task, mutation: Mutations::UpdateTask
@@ -13,6 +13,6 @@ module Types
 
     field :create_project, mutation: Mutations::CreateProject
     field :update_project, mutation: Mutations::UpdateProject
-    field :delete_account, mutation: Mutations::DeleteAccount
+    field :delete_project, mutation: Mutations::DeleteProject
   end
 end

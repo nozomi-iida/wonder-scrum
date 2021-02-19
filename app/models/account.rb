@@ -1,6 +1,9 @@
 # frozen_string_literal: true
+
 # Account
 class Account < ApplicationRecord
+  include JWT::Authenticatable
+
   has_secure_password
 
   has_many :tasks
