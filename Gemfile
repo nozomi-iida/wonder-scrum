@@ -26,6 +26,7 @@ group :development, :test do
   gem 'rubocop-rails', '~> 2.8'
   gem 'rubocop-rspec', '~> 1.44'
   gem 'ruby-debug-ide'
+  gem 'test-prof'
 end
 
 group :development do
