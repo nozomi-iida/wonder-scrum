@@ -2,7 +2,7 @@
 
 module Mutations
   # SignInAccount
-  class SignInAccount < BaseMutation
+  class SignInAccount < PublicMutation
     field :account, Types::AccountType, null: false
 
     argument :email, String, required: true
