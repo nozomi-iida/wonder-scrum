@@ -24,7 +24,7 @@ class GraphqlController < ApplicationController
 
   def load_current_account
     authenticate_account!
-  rescue => _e
+  rescue StandardError => _e
     @current_account = nil
   end
 

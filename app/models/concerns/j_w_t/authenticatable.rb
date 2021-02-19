@@ -54,8 +54,8 @@ module JWT
           )
 
           _type, sub = GraphQL::Schema::UniqueWithinType.decode(payload['sub'], separator: ':')
-        rescue Exception => e
-          fail Exceptions::UnauthorizedError, e.message
+        rescue ArgumentError => e
+          raise Exceptions::UnauthorizedError, e.message
         end
 
         begin

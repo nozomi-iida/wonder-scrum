@@ -36,9 +36,5 @@ class WonderScrumSchema < GraphQL::Schema
     def id_from_object(object, _type, _ctx)
       self::UniqueWithinType.encode(object.class.name, object.id, separator: ':')
     end
-
-    def type_error(e, ctx)
-      super
-    end
   end
 end
