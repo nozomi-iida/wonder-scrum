@@ -2,6 +2,10 @@
 
 # ApplicationController
 class ApplicationController < ActionController::API
+  include GraphqlExceptionHandler
+
+  # before_action :authenticate_account!
+
   attr_reader :current_account
 
   protected
