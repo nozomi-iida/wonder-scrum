@@ -7,5 +7,5 @@ class Task < ApplicationRecord
 
   enum state: { to_do: 0, this_week: 1, today: 2, doing: 3, done: 4 }, _suffix: true
 
-  validates :name, :state, :closed, presence: true
+  validates :name, :state, presence: true
 end
