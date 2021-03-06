@@ -12,7 +12,7 @@ module Mutations
     private
 
     def authenticate_account!
-      fail Exceptions::UnauthorizedError if current_account.blank?
+      fail Exceptions::UnauthorizedError unless current_account.present?
     end
   end
 end

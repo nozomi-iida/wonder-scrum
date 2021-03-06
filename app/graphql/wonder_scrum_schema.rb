@@ -12,8 +12,6 @@ class WonderScrumSchema < GraphQL::Schema
   use GraphQL::Analysis::AST
   use GraphQL::Pagination::Connections
 
-  include GraphqlExceptionHandler
-
   class << self
     # Spec override
     def unauthorized_object(error)

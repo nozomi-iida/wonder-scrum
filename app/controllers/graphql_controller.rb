@@ -11,8 +11,7 @@ class GraphqlController < ApplicationController
     context = {
       current_account: current_account
     }
-    result = WonderScrumSchema.execute(query, variables: variables, context: context,
-                                              operation_name: operation_name)
+    result = WonderScrumSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
   rescue StandardError => e
     handle_error_in_development e
@@ -47,10 +46,11 @@ class GraphqlController < ApplicationController
   end
 
   def handle_error_in_development(e)
-    logger.error e.extentions
+    logger.error e.try(:extentions)
     logger.error e.message
     logger.error e.backtrace.join("\n")
 
-    render json: { errors: [{ message: e.message, extensions: e.extentions, backtrace: e.backtrace }], data: {} }, status: 500
+    render json: { errors: [{ message: e.message, extensions: e.try(:extentions), backtrace: e.backtrace }], data: {} },
+           status: 500
   end
 end

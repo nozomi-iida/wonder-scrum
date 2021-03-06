@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # 例外対応
-module GraphqlExceptionHandler
+module ExceptionHandler
   extend ActiveSupport::Concern
   included do
     rescue_from StandardError do |e|

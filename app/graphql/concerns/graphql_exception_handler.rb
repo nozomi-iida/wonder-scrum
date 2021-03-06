@@ -4,37 +4,23 @@
 module GraphqlExceptionHandler
   extend ActiveSupport::Concern
 
-  # エラーコード
-  module ErrorCode
-    UNAUTHORIZED_ERROR = 'UNAUTHORIZED_ERROR'
-    INTERNAL_SERVER_ERROR = 'INTERNAL_SERVER_ERROR'
-  end
+  include Exceptions::Graphql
 
-  # frozen_string_literal: true
+  included do
+    rescue_from ActiveRecord::RecordNotFound do |e|
+      fail GraphQL::ExecutionError.new("NotFoundError: #{e.message}", extensions: { code: ErrorCode::NOT_FOUND })
+    end
 
-  # 例外対応
-  module GraphqlExceptionHandler
-    extend ActiveSupport::Concern
+    rescue_from ActiveRecord::RecordInvalid do |e|
+      fail GraphQL::ExecutionError.new("RecordInvalid: #{e.message}", extensions: { code: ErrorCode::RECORD_INVALID })
+    end
 
-    include Exceptions::Graphql
+    rescue_from Exceptions::UnauthorizedError do |e|
+      fail GraphQL::ExecutionError.new("認証エラー: #{e.message}", extensions: { code: ErrorCode::UNAUTHORIZED_ERROR })
+    end
 
-    included do
-      rescue_from ActiveRecord::RecordNotFound do |e|
-        fail GraphQL::ExecutionError.new("NotFoundError: #{e.message}", extensions: { code: ErrorCode::NOT_FOUND })
-      end
-
-      rescue_from ActiveRecord::RecordInvalid do |e|
-        fail GraphQL::ExecutionError.new("RecordInvalid: #{e.message}", extensions: { code: ErrorCode::RECORD_INVALID })
-      end
-
-      rescue_from Exceptions::UnauthorizedError do |e|
-        fail GraphQL::ExecutionError.new("認証エラー: #{e.message}", extensions: { code: ErrorCode::UNAUTHORIZED_ERROR })
-      end
-
-      rescue_from StandardError do |e|
-        fail GraphQL::ExecutionError.new(e.message, extensions: { code: ErrorCode::INTERNAL_SERVER_ERROR })
-      end
+    rescue_from StandardError do |e|
+      fail GraphQL::ExecutionError.new(e.message, extensions: { code: ErrorCode::INTERNAL_SERVER_ERROR })
     end
   end
-
 end
