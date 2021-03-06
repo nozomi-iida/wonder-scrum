@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-RSpec.describe Mutations::DeleteAccount do
+RSpec.describe Mutations::DeleteAccount, skip: true do
   subject(:resolver) { described_class.new(object: nil, context: {}, field: nil) }
 
   describe 'have correct argument' do

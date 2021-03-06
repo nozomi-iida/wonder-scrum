@@ -2,7 +2,7 @@
 require 'rails_helper'
 
 RSpec.describe Mutations::SignUpAccount do
-  subject(:resolver) { described_class.new(object: nil, context: {}, field: nil) }
+  let(:mutation) { described_class.new(object: nil, context: {}, field: nil) }
 
   describe 'have correct arguments' do
     subject { described_class }
@@ -13,18 +13,24 @@ RSpec.describe Mutations::SignUpAccount do
     it { is_expected.to accept_argument(:password_confirmation).of_type('String!') }
   end
 
-  it('exist resolver method') { is_expected.to respond_to(:resolve) }
+  describe '#resolve' do
+    subject(:result) { mutation.resolve(**params) }
 
-  context 'return correct values' do
-    it do
-      object = resolver.resolve(
-        username: 'Nozomi',
-        email: 'test@test.com',
-        password: 'password',
-        password_confirmation: 'password'
-      )
-      expect(object).to have_key(:account)
-      expect(object[:account][:username]).to eq 'Nozomi'
+    context 'return sign up information' do
+      let(:params) do
+        { username: account.username,
+          email: account.email,
+          password: 'password',
+          password_confirmation: 'password' }
+      end
+      let!(:account) { build(:account) }
+
+      it 'OK' do
+        expect(result).to have_key(:account)
+        expect(result).to have_key(:token)
+        expect(result[:account]).to be_a Account
+        expect(result[:token]).to be_a String
+      end
     end
   end
 end
