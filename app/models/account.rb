@@ -7,6 +7,7 @@ class Account < ApplicationRecord
   has_secure_password
 
   has_many :tasks
+  has_many :projects
 
   validates :username, presence: true
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i.freeze

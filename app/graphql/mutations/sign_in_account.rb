@@ -4,16 +4,14 @@ module Mutations
   # SignInAccount
   class SignInAccount < PublicMutation
     field :account, Types::AccountType, null: false
+    field :token, String, null: false
 
     argument :email, String, required: true
     argument :password, String, required: true
 
-    def resolve(args)
-      account = Account.find_by(
-        email: args[:email]
-      ).try(:authenticate, args[:password])
-
-      return unless account
+    def resolve(email:, password:)
+      account = Account.find_by!(email: email)
+      fail Exceptions::UnauthorizedError unless account.authenticate(password)
 
       {
         account: account,

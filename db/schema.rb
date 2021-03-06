@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_18_223649) do
+ActiveRecord::Schema.define(version: 2021_03_05_150202) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(version: 2021_02_18_223649) do
     t.string "title", comment: "project title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.uuid "creator_id"
+    t.index ["creator_id"], name: "index_projects_on_creator_id"
   end
 
   create_table "tasks", id: :uuid, default: -> { "gen_random_uuid()" }, comment: "task", force: :cascade do |t|
@@ -51,6 +53,7 @@ ActiveRecord::Schema.define(version: 2021_02_18_223649) do
   end
 
   add_foreign_key "jtis", "accounts", on_delete: :cascade
+  add_foreign_key "projects", "accounts", column: "creator_id", on_delete: :nullify
   add_foreign_key "tasks", "accounts", column: "creator_id", on_delete: :nullify
   add_foreign_key "tasks", "projects", on_delete: :cascade
 end

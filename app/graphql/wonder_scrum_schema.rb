@@ -2,6 +2,8 @@
 
 # WonderScrumSchema
 class WonderScrumSchema < GraphQL::Schema
+  include GraphqlExceptionHandler
+
   mutation(Types::MutationType)
   query(Types::QueryType)
 
@@ -9,8 +11,6 @@ class WonderScrumSchema < GraphQL::Schema
   use GraphQL::Execution::Errors
   use GraphQL::Analysis::AST
   use GraphQL::Pagination::Connections
-
-  include ExceptionHandler
 
   class << self
     # Spec override

@@ -1,14 +1,13 @@
 # frozen_string_literal: true
 module Mutations
   # CreateProject
-  class CreateProject < BaseMutation
+  class CreateProject < PrivateMutation
     field :project, Types::ProjectType, null: false
 
     argument :title, String, required: true
-    argument :account_id, ID, required: false
 
     def resolve(args)
-      project = Project.create!(args)
+      project = Project.create!(args.merge(creator: current_account))
       { project: project }
     end
   end
