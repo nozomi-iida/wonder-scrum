@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 module Mutations
   # UpdateProjectMembership
-  class UpdateProjectMembership < BaseMutation
+  class UpdateProjectMembership < PrivateMutation
     field :projectMemberShip, Types::ProjectMembershipType, null: false
 
     argument :role, Types::Enums::ProjectMembershipRoleType, required: true
