@@ -6,6 +6,7 @@ module Types
     field :name, String, null: false
     field :state, Enums::TaskState, null: false
     field :closed, Boolean, null: false
+    field :assignees, [AccountType], null: true
     field :creator, AccountType, null: false
     field :project, ProjectType, null: false
     field :created_at, Types::DateTimeType, null: false
