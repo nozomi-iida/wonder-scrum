@@ -1,7 +1,8 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
-Rspec.describe Mutations::UpdateProject do
+RSpec.describe Mutations::CreateTask do
   subject(:mutation) { described_class.new(object: nil, context: context, field: nil) }
 
   let_it_be(:account) { create(:account) }
@@ -10,19 +11,21 @@ Rspec.describe Mutations::UpdateProject do
   describe 'have correct argument' do
     subject { described_class }
 
+    it { is_expected.to accept_argument(:name).of_type('String!') }
+    it { is_expected.to accept_argument(:state).of_type('TaskState!') }
+    it { is_expected.to accept_argument(:assignee_ids).of_type('[ID!]') }
     it { is_expected.to accept_argument(:project_id).of_type('ID!') }
-    it { is_expected.to accept_argument(:title).of_type('String!') }
   end
 
   describe '#resolve' do
     subject(:result) { mutation.resolve(**params) }
     let(:project) { create(:project) }
-    let(:params) { { project_id: project.id, title: 'updated_project' } }
+    let(:task) { build(:task) }
+    let(:params) { { name: task.name, state: task.state, project_id: project.id } }
 
-    it 'update task' do
-      expect(result).to have_key(:project)
-      expect(result[:project]).to be_a Project
-      expect(result[:project][:title]).to eq 'updated_project'
+    it 'OK' do
+      expect(result).to have_key(:task)
+      expect(result[:task]).to be_a Task
     end
   end
 end

@@ -2,9 +2,10 @@
 FactoryBot.define do
   factory :task do
     sequence(:name) { |n| "task#{n}" }
+    state { 'TO_DO' }
     closed { false }
 
-    association :account
+    association :creator, factory: :account
     association :project
   end
 end

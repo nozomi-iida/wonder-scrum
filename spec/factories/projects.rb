@@ -2,5 +2,7 @@
 FactoryBot.define do
   factory :project do
     title { 'Test project' }
+
+    association :creator, factory: :account
   end
 end
