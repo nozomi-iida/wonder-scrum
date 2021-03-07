@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-RSpec.describe Mutations::DeleteAccount, skip: true do
-  subject(:resolver) { described_class.new(object: nil, context: {}, field: nil) }
+RSpec.describe Mutations::DeleteAccount do
+  subject(:mutation) { described_class.new(object: nil, context: context, field: nil) }
+
+  let_it_be(:account) { create(:account) }
+  let(:context) { { current_account: account } }
 
   describe 'have correct argument' do
     subject { described_class }
@@ -10,19 +13,15 @@ RSpec.describe Mutations::DeleteAccount, skip: true do
     it { is_expected.to accept_argument(:account_id).of_type('ID!') }
   end
 
-  it('exist resolver method') { is_expected.to respond_to(:resolve) }
-
   context 'return correct values' do
+    subject(:result) { mutation.resolve(**params) }
     let(:account) { create(:account) }
+    let(:params) { { account_id: account.id } }
 
-    it do
-      object = resolver.resolve(
-        account_id: account.id
-      )
-      expect(object).to have_key(:account)
-      expect(object[:account]).to be_a Account
-      expect(object[:account].id).to eq account.id
-      expect(object[:account].destroyed?).to eq true
+    it 'delete account ' do
+      expect(result).to have_key(:account)
+      expect(result[:account]).to be_a Account
+      expect(result[:account].destroyed?).to eq true
     end
   end
 end
