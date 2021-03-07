@@ -15,5 +15,9 @@ module Types
     field :create_project, mutation: Mutations::CreateProject
     field :update_project, mutation: Mutations::UpdateProject
     field :delete_project, mutation: Mutations::DeleteProject
+
+    field :invite_project_membership, mutation: Mutations::InviteProjectMembership
+    field :update_project_membership, mutation: Mutations::UpdateProjectMembership
+    field :delete_project_membership, mutation: Mutations::DeleteProjectMembership
   end
 end
