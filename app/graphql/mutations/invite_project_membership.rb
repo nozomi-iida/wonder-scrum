@@ -1,4 +1,6 @@
+# frozen_string_literal: true
 module Mutations
+  # InviteProjectMembership
   class InviteProjectMembership < PrivateMutation
     field :projectMembership, Types::ProjectMembershipType, null: false
 
@@ -7,8 +9,8 @@ module Mutations
     argument :account_id, ID, required: true
 
     def resolve(args)
-      projectMembership = ProjectMembership.create!(args)
-      { projectMembership: projectMembership }
+      project_membership = ProjectMembership.create!(args)
+      { project_membership: project_membership }
     end
   end
 end

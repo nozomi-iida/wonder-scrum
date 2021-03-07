@@ -1,4 +1,6 @@
+# frozen_string_literal: true
 module Mutations
+  # DeleteProjectMembership
   class DeleteProjectMembership < PrivateMutation
     field :project_membership, Types::ProjectMembershipType, null: false
 
@@ -7,7 +9,7 @@ module Mutations
     def resolve(args)
       project_membership = ProjectMembership.find(args[:project_membership_id])
       project_membership.destroy!
-      {project_membership: project_membership}
+      { project_membership: project_membership }
     end
   end
 end

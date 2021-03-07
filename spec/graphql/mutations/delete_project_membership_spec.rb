@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'rspec'
 
 Rspec.describe Mutations::DeleteProjectMembership do
@@ -14,7 +15,7 @@ Rspec.describe Mutations::DeleteProjectMembership do
     let(:project_membership) { create(:project_membership) }
     let(:params) { { project_membership_id: project_membership.id } }
 
-    it "delete project member ship" do
+    it 'delete project member ship' do
       expect(result).to have_key(:project_membership)
       expect(result[:project_membership]).to be_a ProjectMembership
       expect(result[:project_membership].destroyed?).to eq true

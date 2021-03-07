@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'rspec'
 
 Rspec.describe Mutations::InviteProjectMembership do
@@ -21,8 +22,8 @@ Rspec.describe Mutations::InviteProjectMembership do
     let(:params) { { role: 0, state: 0, project_id: project.id, account_id: account.id } }
 
     it 'invite member' do
-      expect(result).to have_key(:projectMembership)
-      expect(result[:projectMembership]).to be_a ProjectMembership
+      expect(result).to have_key(:project_membership)
+      expect(result[:project_membership]).to be_a ProjectMembership
     end
   end
 end

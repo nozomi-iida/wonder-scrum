@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'rspec'
 
 Rspec.describe Mutations::UpdateProjectMembership do
@@ -18,7 +19,7 @@ Rspec.describe Mutations::UpdateProjectMembership do
     let(:project_membership) { create(:project_membership) }
     let(:params) { { project_membership_id: project_membership.id, role: 'admin' } }
 
-    it "update project membership" do
+    it 'update project membership' do
       expect(result).to have_key(:project_membership)
       expect(result[:project_membership]).to be_a ProjectMembership
       expect(result[:project_membership][:role]).to eq 'admin'

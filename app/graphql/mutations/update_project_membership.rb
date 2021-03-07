@@ -1,4 +1,6 @@
+# frozen_string_literal: true
 module Mutations
+  # UpdateProjectMembership
   class UpdateProjectMembership < BaseMutation
     field :projectMemberShip, Types::ProjectMembershipType, null: false
 
@@ -6,9 +8,9 @@ module Mutations
     argument :project_membership_id, ID, required: true
 
     def resolve(args)
-      projectMemberShip = ProjectMembership.find(args[:project_membership_id])
-      projectMemberShip.update!(args.except(:project_membership_id))
-      { project_membership: projectMemberShip }
+      project_membership = ProjectMembership.find(args[:project_membership_id])
+      project_membership.update!(args.except(:project_membership_id))
+      { project_membership: project_membership }
     end
   end
 end
