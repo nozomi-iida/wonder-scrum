@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 module Mutations
   # DeleteTask
-  class DeleteTask < BaseMutation
+  class DeleteTask < PrivateMutation
     field :task, Types::TaskType, null: false
 
     argument :task_id, ID, required: true

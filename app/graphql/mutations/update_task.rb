@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 module Mutations
   # UpdateTask
-  class UpdateTask < BaseMutation
+  class UpdateTask < PrivateMutation
     field :task, Types::TaskType, null: false
 
     argument :task_id, ID, required: true

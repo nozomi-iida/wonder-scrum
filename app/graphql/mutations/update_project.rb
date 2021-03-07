@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 module Mutations
   # UpdateProject
-  class UpdateProject < BaseMutation
+  class UpdateProject < PrivateMutation
     field :project, Types::ProjectType, null: false
 
     argument :project_id, ID, required: true

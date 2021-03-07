@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 module Mutations
   # DeleteAccount
-  class DeleteAccount < BaseMutation
+  class DeleteAccount < PrivateMutation
     field :account, Types::AccountType, null: false
 
     argument :account_id, ID, required: true

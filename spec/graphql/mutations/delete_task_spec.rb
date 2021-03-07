@@ -2,10 +2,7 @@
 require 'rails_helper'
 
 Rspec.describe Mutations::DeleteTask do
-  subject(:mutation) { described_class.new(object: nil, context: context, field: nil) }
-
-  let_it_be(:account) { create(:account) }
-  let(:context) { { current_account: account } }
+  include_context 'private_mutation_module'
 
   describe 'have correct argument' do
     subject { described_class }
