@@ -2,6 +2,7 @@
 module Types
   # ProjectMembershipType
   class ProjectMembershipType < Types::BaseObject
+    field :id, ID, null: false
     field :role, Types::Enums::ProjectMembershipRoleType, null: false
     field :state, Types::Enums::ProjectMembershipStateType, null: false
     field :account, AccountType, null: false
