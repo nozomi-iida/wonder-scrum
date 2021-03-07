@@ -17,11 +17,12 @@ RSpec.describe Mutations::CreateTask do
     it { is_expected.to accept_argument(:project_id).of_type('ID!') }
   end
 
+  # FIXME: How to test if resolve can make assignees
   describe '#resolve' do
     subject(:result) { mutation.resolve(**params) }
     let(:project) { create(:project) }
     let(:task) { build(:task) }
-    let(:params) { { name: task.name, state: task.state, project_id: project.id } }
+    let(:params) { { name: task.name, state: task.state, project_id: project.id, assignee_ids: [account.id] } }
 
     it 'OK' do
       expect(result).to have_key(:task)

@@ -67,12 +67,15 @@ test:
 	@make rspec
 
 # rails generatorコマンド
-.PHONY: rails_g_model rails_g_migration
+.PHONY: rails_g_model rails_g_migration rails_g_object rails_g_mutation
 buf_model_name:
 	@$(eval MODEL_NAME := $(shell read -p "Input model name: " BUF; echo $$BUF))
 
 buf_migrate_label:
 	@$(eval MIGRATE_LABEL := $(shell read -p "Input action and class label(like XxxYyy): " BUF; echo $$BUF))
+
+buf_graphql_label:
+	@$(eval GRAPHQL_LABEL := $(shell read -p "Input graphql label(like XxxYyy): " BUF; echo $$BUF))
 
 rails_g_model: buf_model_name
 	@$(RAILS_C) g model $(MODEL_NAME)
@@ -80,11 +83,23 @@ rails_g_model: buf_model_name
 rails_g_migration: buf_migrate_label
 	@$(RAILS_C) g migration $(MIGRATE_LABEL)
 
-rails_g_object: buf_migrate_label
-	@$(RAILS_C) g graphql:object $(MIGRATE_LABEL)
+rails_g_object: buf_graphql_label
+	@$(RAILS_C) g graphql:object $(GRAPHQL_LABEL)
 
-rails_g_mutation: buf_migrate_label
-	@$(RAILS_C) g graphql:mutation $(MIGRATE_LABEL)
+rails_g_mutation: buf_graphql_label
+	@$(RAILS_C) g graphql:mutation $(GRAPHQL_LABEL)
+
+# rails delete command
+# FIXME: How to build rails destroy command
+.PHONY: rails_d
+buf_action_name:
+	@$(eval ACTION_NAME := $(shell read -p "Input action name: " Buf; echo $$BUF))
+
+buf_label_name:
+	@$(eval LABEL_NAME := $(shell read -p "Input label name: " BUF; echo $$BUF))
+
+rails_d: buf_action_name buf_label_name
+	@$(RAILS_C) d $(ACTION_NAME) $(LABEL_NAME)
 
 # swagger
 rswag:

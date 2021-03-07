@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_05_150202) do
+ActiveRecord::Schema.define(version: 2021_03_07_022008) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -40,6 +40,15 @@ ActiveRecord::Schema.define(version: 2021_03_05_150202) do
     t.index ["creator_id"], name: "index_projects_on_creator_id"
   end
 
+  create_table "task_accounts", id: :uuid, default: -> { "gen_random_uuid()" }, comment: "Intermediate table between task and account", force: :cascade do |t|
+    t.uuid "task_id"
+    t.uuid "account_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_task_accounts_on_account_id"
+    t.index ["task_id"], name: "index_task_accounts_on_task_id"
+  end
+
   create_table "tasks", id: :uuid, default: -> { "gen_random_uuid()" }, comment: "task", force: :cascade do |t|
     t.string "name", comment: "task name"
     t.integer "state", default: 0, comment: "task state"
@@ -54,6 +63,8 @@ ActiveRecord::Schema.define(version: 2021_03_05_150202) do
 
   add_foreign_key "jtis", "accounts", on_delete: :cascade
   add_foreign_key "projects", "accounts", column: "creator_id", on_delete: :nullify
+  add_foreign_key "task_accounts", "accounts", on_delete: :cascade
+  add_foreign_key "task_accounts", "tasks", on_delete: :cascade
   add_foreign_key "tasks", "accounts", column: "creator_id", on_delete: :nullify
   add_foreign_key "tasks", "projects", on_delete: :cascade
 end
