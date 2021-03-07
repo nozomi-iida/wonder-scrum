@@ -27,6 +27,7 @@ RSpec.describe Mutations::CreateTask do
     it 'OK' do
       expect(result).to have_key(:task)
       expect(result[:task]).to be_a Task
+      expect(result[:task].assignees.first).to eq account
     end
   end
 end

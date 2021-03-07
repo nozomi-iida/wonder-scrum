@@ -7,6 +7,7 @@ module Mutations
     argument :task_id, ID, required: true
     argument :name, String, required: false
     argument :state, Types::Enums::TaskState, required: false
+    argument :assignee_ids, [ID], required: false, loads: Types::AccountType
     argument :closed, Boolean, required: false
 
     def resolve(args)
