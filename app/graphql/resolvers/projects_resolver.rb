@@ -5,7 +5,8 @@ module Resolvers
     type [Types::ProjectType], null: false
 
     def resolve
-      Project.all
+      creator = Account.find(current_account.id)
+      creator.projects
     end
   end
 end
