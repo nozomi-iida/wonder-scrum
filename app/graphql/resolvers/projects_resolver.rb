@@ -2,11 +2,10 @@
 module Resolvers
   # ProjectResolver
   class ProjectsResolver < BaseResolver
-    type [Types::ProjectType], null: false
+    type Types::ProjectType.connection_type, null: false
 
     def resolve
-      creator = Account.find(current_account.id)
-      creator.projects
+      current_account.projects
     end
   end
 end

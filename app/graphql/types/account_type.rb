@@ -5,7 +5,7 @@ module Types
     field :id, ID, null: false
     field :username, String, null: false
     field :email, String, null: false
-    field :projects, [Project], null: true
-    field :tasks, [Task], null: true
+    field :projects, [ProjectType], null: true
+    field :tasks, [TaskType], null: true
   end
 end
